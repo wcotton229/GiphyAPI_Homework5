@@ -12,21 +12,21 @@ $(document).ready(function(){
         $.ajax({
             url: queryURL, 
             method: "GET"
-        }).done(function(response) {
+        }).then(function(response) {
 
             for(var i = 0; i < limit; i++) {    
 
                 var displayDiv = $("<div>");
                 displayDiv.addClass("holder");
                 var image = $("<img>");
-                image.attr("src", response.data[j].images.original_still.url);
-                image.attr("data-still", response.data[j].images.original_still.url);
-                image.attr("data-animate", response.data[j].images.original.url);
+                image.attr("src", response.data[i].images.original_still.url);
+                image.attr("data-still", response.data[i].images.original_still.url);
+                image.attr("data-animate", response.data[i].images.original.url);
                 image.attr("data-state", "still");
                 image.attr("class", "gif");
                 displayDiv.append(image);
 
-                var rating = response.data[j].rating;
+                var rating = response.data[i].rating;
                 console.log(response);
                 var pRating = $("<p>").text("Rating: " + rating);
                 displayDiv.append(pRating)
@@ -40,13 +40,13 @@ $(document).ready(function(){
 
         $("#display-buttons").empty();
 
-        for (var i = 0; i < displayedButtons.length; i++){
+        for (var j = 0; j < displayedButtons.length; j++){
 
             var newButton = $("<button>") 
-            newButton.attr("class", "btn btn-default");
+            newButton.attr("class", "btn btn-primary");
             newButton.attr("id", "input")  
-            newButton.attr("data-name", displayedButtons[i]); 
-            newButton.text(displayedButtons[i]); 
+            newButton.attr("data-name", displayedButtons[j]); 
+            newButton.text(displayedButtons[j]); 
             $("#display-buttons").append(newButton); 
         }
     }
@@ -68,7 +68,7 @@ $(document).ready(function(){
         }   
     }
 
-    $("#submitPress").on("click", function(){
+    $("#submitBtn").on("click", function(){
 
         var input = $("#user-input").val().trim();
         form.reset();
